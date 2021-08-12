@@ -103,7 +103,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-
       - name: Cache node_modules
         uses: actions/cache@v2
         with:
@@ -130,8 +129,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-              - name: Cache node_modules
-      - uses: actions/cache@v2
+      - name: Cache node_modules
+        uses: actions/cache@v2
         with:
           path: node_modules
           key: node_modules-${{ hashFiles('**/yarn.lock') }}
@@ -141,6 +140,7 @@ jobs:
         run: make setup
         env:
           CI: true
-      - uses: wagoid/commitlint-github-action@v4
+      - name: CommitLint
+        uses: wagoid/commitlint-github-action@v4
         with:
           configFile: .commitlintrc.js
