@@ -1,0 +1,28 @@
+name: CI
+
+on: [push]
+branches: main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+      - name: Setup
+        run: make setup
+        env:
+          CI: true
+      - name: Build
+        run: make build
+        env:
+          CI: true
+      - name: Deploy
+        run: make deploy
+        env:
+          CI: true

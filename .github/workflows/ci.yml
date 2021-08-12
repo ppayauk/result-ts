@@ -1,0 +1,131 @@
+name: CI
+
+on: [push, pull]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+
+      - name: Setup
+        run: make setup
+        env:
+          CI: true
+      - name: Build
+        run: make build
+        env:
+          CI: true
+      - name: Archive build.zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: build.zip
+          path: out/build.zip
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+
+      - name: Setup
+        run: make setup
+        env:
+          CI: true
+      - name: Test
+        run: make test
+        env:
+          CI: true
+      - name: Archive test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results.xml
+          path: out/test-results.xml
+      - name: Upload test results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          check_name: Test Results
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: out/test-results.xml
+          check_run_annotations: all tests, skipped tests
+          report_individual_runs: true
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+
+      - name: Setup
+        run: make setup
+        env:
+          CI: true
+      - name: Lint
+        run: make lint
+        env:
+          CI: true
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+
+      - name: Setup
+        run: make setup
+        env:
+          CI: true
+      - name: Format
+        run: make format
+        env:
+          CI: true
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+      - name: Setup
+        run: make setup
+        env:
+          CI: true
+      - name: Coverage
+        run: make coverage
+        env:
+          CI: true
+      - name: Archive coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage.json
+          path: out/coverage-final.json
