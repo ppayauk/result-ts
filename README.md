@@ -1,6 +1,7 @@
 # Rust's Result for Typescript.
 
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 Using fp-ts Either, but with easier naming
 
@@ -20,9 +21,19 @@ See the [examples](./examples) directory
 
 ## Devlopment
 
+### Prerequisites
+
+Docker
+
+### Running
+
+The project contains a dev-container that has a prebuilt dev environment with node installed.
+run `make` to build
+
 ## CI
 
 Github Actions runs makefile commands to test, lint, built, format, coverage before pull requests can be merged. See [ci.yml](.github/workflows/ci.yml)
+Debug with `make debug-actions`. This uses act to run the workflows locally.
 
 ## CD
 

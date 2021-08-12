@@ -1,9 +1,9 @@
-name: CI
+name: Continuous Integration
 
-on: [push, pull]
+on: [push, pull_request]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -23,13 +23,8 @@ jobs:
         run: make build
         env:
           CI: true
-      - name: Archive build.zip
-        uses: actions/upload-artifact@v2
-        with:
-          name: build.zip
-          path: out/build.zip
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -63,7 +58,7 @@ jobs:
           check_run_annotations: all tests, skipped tests
           report_individual_runs: true
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -84,7 +79,7 @@ jobs:
         env:
           CI: true
   format:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -105,10 +100,9 @@ jobs:
         env:
           CI: true
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-
       - name: Cache node_modules
         uses: actions/cache@v2
         with:
@@ -129,3 +123,24 @@ jobs:
         with:
           name: coverage.json
           path: out/coverage-final.json
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+      - name: Setup
+        run: make setup
+        env:
+          CI: true
+      - name: CommitLint
+        uses: wagoid/commitlint-github-action@v4
+        with:
+          configFile: .commitlintrc.js

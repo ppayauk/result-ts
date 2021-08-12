@@ -1,10 +1,13 @@
-name: CI
+name: Continuous Deployment
 
-on: [push]
-branches: main
+on:
+  push:
+    branches:
+      - main
+      - beta
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  release:
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Cache node_modules
@@ -18,11 +21,16 @@ jobs:
         run: make setup
         env:
           CI: true
+          HUSKY: 0
       - name: Build
         run: make build
         env:
           CI: true
-      - name: Deploy
-        run: make deploy
+          HUSKY: 0
+      - name: Release
+        run: make release
         env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: true
+          HUSKY: 0

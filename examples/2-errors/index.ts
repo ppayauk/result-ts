@@ -1,13 +1,13 @@
 import { Result, err, ok, unwrap, isErr } from '../../src'
 
 type DivideByZero = {
-  type: 'DivideByZero'
+  readonly type: 'DivideByZero'
 }
 type NANInput = {
-  type: 'NANInput'
+  readonly type: 'NANInput'
 }
 type InfinateInput = {
-  type: 'InfinateInput'
+  readonly type: 'InfinateInput'
 }
 type DivisionError = DivideByZero | NANInput | InfinateInput
 
