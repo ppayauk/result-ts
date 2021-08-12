@@ -3,6 +3,7 @@ all: clean setup format lint test build coverage
 .PHONY: setup
 setup:
 	mkdir -p out
+	husky install
 	npm ci
 	
 .PHONY: dev

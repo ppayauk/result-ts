@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": false,
   "description": "Rust's Result implemented in Typescript using fp-ts",
-  "main": "lib/index.js",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ppayauk/result-ts"
@@ -20,7 +24,7 @@
     "test.watch": "jest --watchAll",
     "test.cov": "CI=true jest --coverage --ci --coverageDirectory='<rootDir>/out'",
     "semantic-release": "semantic-release",
-    "prepare": "husky install"
+    "prepare": "npm run build"
   },
   "author": "james@ppaya.co.uk",
   "license": "ISC",

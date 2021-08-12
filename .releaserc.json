@@ -7,12 +7,12 @@
         "preset": "eslint",
         "releaseRules": [
           { "tag": "Breaking", "release": "major" },
-          { "tag": "Build", "release": "minor" },
-          { "tag": "Chore", "release": "minor" },
+          { "tag": "Build", "release": "patch" },
+          { "tag": "Chore", "release": "patch" },
           { "tag": "Fix", "release": "patch" },
           { "tag": "New", "release": "minor" },
-          { "tag": "Update", "release": "minor" },
-          { "tag": "Upgrade", "release": "minor" }
+          { "tag": "Update", "release": "patch" },
+          { "tag": "Upgrade", "release": "patch" }
         ]
       }
     ],
@@ -22,12 +22,12 @@
         "preset": "eslint",
         "releaseRules": [
           { "tag": "Breaking", "release": "major" },
-          { "tag": "Build", "release": "minor" },
-          { "tag": "Chore", "release": "minor" },
+          { "tag": "Build", "release": "patch" },
+          { "tag": "Chore", "release": "patch" },
           { "tag": "Fix", "release": "patch" },
           { "tag": "New", "release": "minor" },
-          { "tag": "Update", "release": "minor" },
-          { "tag": "Upgrade", "release": "minor" }
+          { "tag": "Update", "release": "patch" },
+          { "tag": "Upgrade", "release": "patch" }
         ]
       }
     ],
@@ -44,6 +44,7 @@
         "assets": ["package.json", "CHANGELOG.md"],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
-    ]
+    ],
+    "@semantic-release/npm"
   ]
 }
