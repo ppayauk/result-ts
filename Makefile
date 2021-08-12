@@ -37,8 +37,8 @@ clean:
 	rm -rf node_modules/*
 	rm -rf node_modules/.[a-zA-Z_-]*
 
-.PHONY: deploy
-deploy:
+.PHONY: release
+release:
 	npx semantic-release
 
 .PHONY: test
