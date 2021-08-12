@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [push, pull_request]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -24,7 +24,7 @@ jobs:
         env:
           CI: true
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -58,7 +58,7 @@ jobs:
           check_run_annotations: all tests, skipped tests
           report_individual_runs: true
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -79,7 +79,7 @@ jobs:
         env:
           CI: true
   format:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -100,7 +100,7 @@ jobs:
         env:
           CI: true
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 

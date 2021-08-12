@@ -53,3 +53,7 @@ test.watch:
 coverage:
 	rm -rf ./coverage
 	npm run test.cov
+
+.PHONY: debug-actions
+debug-actions:
+	npx act -P ubuntu-20.04=ghcr.io/catthehacker/ubuntu:act-20.04

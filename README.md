@@ -21,11 +21,19 @@ See the [examples](./examples) directory
 
 ## Devlopment
 
+### Prerequisites
+
+Docker
+
+### Running
+
 The project contains a dev-container that has a prebuilt dev environment with node installed.
+run `make` to build
 
 ## CI
 
 Github Actions runs makefile commands to test, lint, built, format, coverage before pull requests can be merged. See [ci.yml](.github/workflows/ci.yml)
+Debug with `make debug-actions`. This uses act to run the workflows locally.
 
 ## CD
 

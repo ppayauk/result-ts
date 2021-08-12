@@ -3,10 +3,11 @@ name: Continuous Deployment
 on:
   push:
     branches:
-      - [main, beta]
+      - main
+      - beta
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Cache node_modules
