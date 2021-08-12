@@ -19,7 +19,8 @@
     "test": "CI=true JEST_JUNIT_OUTPUT_DIR=out JEST_JUNIT_OUTPUT_FILE=./out/test-results.xml jest --testResultsProcessor ./node_modules/jest-junit",
     "test.watch": "jest --watchAll",
     "test.cov": "CI=true jest --coverage --ci --coverageDirectory='<rootDir>/out'",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
   },
   "author": "james@ppaya.co.uk",
   "license": "ISC",
@@ -45,7 +46,6 @@
     "husky": "^7.0.1",
     "jest": "^27.0.6",
     "jest-junit": "^12.2.0",
-    "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "semantic-release": "^17.4.4",
     "typescript": "^4.3.5"
@@ -91,8 +91,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "lint-staged": {
-    "*": "make lint"
   }
 }
