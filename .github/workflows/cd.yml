@@ -21,12 +21,15 @@ jobs:
         run: make setup
         env:
           CI: true
+          HUSKY: 0
       - name: Build
         run: make build
         env:
           CI: true
+          HUSKY: 0
       - name: Release
         run: make release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: true
+          HUSKY: 0
