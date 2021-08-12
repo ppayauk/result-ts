@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull]
+on: [push, pull-request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,11 +23,6 @@ jobs:
         run: make build
         env:
           CI: true
-      - name: Archive build.zip
-        uses: actions/upload-artifact@v2
-        with:
-          name: build.zip
-          path: out/build.zip
   test:
     runs-on: ubuntu-latest
     steps:
