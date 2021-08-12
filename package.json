@@ -1,6 +1,6 @@
 {
   "name": "@ppaya/result-ts",
-  "version": "0.0.0-development",
+  "version": "0.0.0",
   "private": false,
   "description": "Rust's Result implemented in Typescript using fp-ts",
   "main": "lib/index.js",
