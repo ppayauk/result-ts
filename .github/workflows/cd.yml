@@ -3,7 +3,7 @@ name: Continuous Deployment
 on:
   push:
     branches:
-      - main
+      - [main, { name: 'beta', prerelease: true }]
 jobs:
   release:
     runs-on: ubuntu-latest
