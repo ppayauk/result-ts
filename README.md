@@ -37,4 +37,4 @@ Debug with `make debug-actions`. This uses act to run the workflows locally.
 
 ## CD
 
-Github Actions automatically publishes commits to main to NPM. See [cd.yml](.github/workflows/cd.yml)
+Github Actions automatically publishes commits to main to NPM and Github Releases. See [cd.yml](.github/workflows/cd.yml)
