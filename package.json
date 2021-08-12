@@ -31,15 +31,14 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-typescript": "^7.15.0",
     "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
     "@tsconfig/node14": "^1.0.1",
     "@types/jest": "^27.0.0",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
     "act": "0.0.6",
     "commitizen": "^4.2.4",
-    "conventional-changelog-eslint": "^3.0.9",
-    "cz-conventional-changelog": "^3.3.0",
+    "commitlint-config-eslint": "github:admwx7/commitlint-config-eslint",
+    "cz-adapter-eslint": "^0.3.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-functional": "^3.5.0",
@@ -88,10 +87,5 @@
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.2.3",
     "@semantic-release/release-notes-generator": "^9.0.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
