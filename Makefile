@@ -4,6 +4,7 @@ all: clean setup format lint test build coverage
 setup:
 	mkdir -p out
 	npm ci
+	npx husky install
 	
 .PHONY: dev
 dev: 
@@ -37,8 +38,8 @@ clean:
 	rm -rf node_modules/*
 	rm -rf node_modules/.[a-zA-Z_-]*
 
-.PHONY: deploy
-deploy:
+.PHONY: release
+release:
 	npx semantic-release
 
 .PHONY: test
@@ -53,3 +54,7 @@ test.watch:
 coverage:
 	rm -rf ./coverage
 	npm run test.cov
+
+.PHONY: debug-actions
+debug-actions:
+	npx act -P ubuntu-20.04=ghcr.io/catthehacker/ubuntu:act-20.04
