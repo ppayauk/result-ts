@@ -8,11 +8,7 @@ import {
   mapOk,
   mapErr,
   flattenArray,
-  // flatten,
   flattenRecord,
-  // error,
-  // safeExecute,
-  // safeExecuteAsync,
 } from '.'
 import * as fc from 'fast-check'
 import * as R from 'fp-ts/lib/Record'
@@ -263,98 +259,3 @@ describe('flattenRecord', () => {
     )
   })
 })
-
-//   /* eslint functional/no-throw-statement:"off" */
-//   describe('safeExecute', () => {
-//     it('Should catch errors', () => {
-//       const result = safeExecute(
-//         () => {
-//           throw Error('Help')
-//         },
-//         (exception) => {
-//           return error('HELP', 'help', { exception })
-//         }
-//       )
-//       expect(isErr(result)).toBeTruthy()
-//     })
-
-//     it('Should return oks', () => {
-//       const result = safeExecute(
-//         () => {
-//           return 'hello'
-//         },
-//         (exception) => {
-//           return error('HELP', 'help', { exception })
-//         }
-//       )
-//       expect(isErr(result)).toBeFalsy()
-//       expect(unwrap(result)).toEqual('hello')
-//     })
-//   })
-
-//   describe('safeExecuteAsync', () => {
-//     it('Should catch rejects', async () => {
-//       const result = await safeExecuteAsync(
-//         () => Promise.reject('hello'),
-//         (exception) => {
-//           return error('HELP', 'help', { exception })
-//         }
-//       )
-//       expect(isErr(result)).toBeTruthy()
-//     })
-//     it('Should catch exceptions', async () => {
-//       const result = await safeExecuteAsync(
-//         () => {
-//           throw Error('hello')
-//         },
-//         (exception) => {
-//           return error('HELP', 'help', { exception })
-//         }
-//       )
-//       expect(isErr(result)).toBeTruthy()
-//     })
-//     it('Should return ok', async () => {
-//       const result = await safeExecuteAsync(
-//         () => Promise.resolve('hello'),
-//         (exception) => {
-//           return error('HELP', 'help', { exception })
-//         }
-//       )
-//       expect(isErr(result)).toBeFalsy()
-//       expect(unwrap(result)).toEqual('hello')
-//     })
-//   })
-
-//   describe('first', () => {
-//     it('Should return first with 1', async () => {
-//       const testArray = [1]
-//       const firstResult = first(testArray)
-//       expect(isErr(firstResult)).toBeFalsy()
-//     })
-//     it('Should return first with multiple', async () => {
-//       const testArray = [1, 2, 3]
-//       const firstResult = first(testArray)
-//       expect(isErr(firstResult)).toBeFalsy()
-//     })
-//     it('Should return error', async () => {
-//       const testArray: ReadonlyArray<number> = []
-//       const firstResult = first(testArray)
-//       expect(isErr(firstResult)).toBeTruthy()
-//     })
-//   })
-
-//   describe('get', () => {
-//     it('Should return item', async () => {
-//       const testArray = [1, 2, 3]
-//       const result = get(testArray, 1)
-//       expect(isErr(result)).toBeFalsy()
-//     })
-//     it('Should return error', async () => {
-//       const testArray = [1, 2, 3]
-//       const firstResult = get(testArray, 4)
-//       expect(isErr(firstResult)).toBeTruthy()
-//       const myError = unwrapErr(firstResult)
-//       expect(myError.index).toEqual(4)
-//       expect(myError.array).toEqual([1, 2, 3])
-//     })
-//   })
