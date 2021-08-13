@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - beta
+      - development
 jobs:
   release:
     runs-on: ubuntu-20.04
