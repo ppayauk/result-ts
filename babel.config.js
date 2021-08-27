@@ -1,4 +1,19 @@
 module.exports = {
-    presets: [['@babel/preset-env', {targets: {node: '4.2.1'}}],
-    '@babel/preset-typescript']
-  };
+  presets: [
+    '@babel/preset-typescript',
+    '@babel/preset-react',
+    [
+      '@babel/preset-env',
+      {
+        targets: '> 0.25%, not dead',
+      },
+    ],
+  ],
+  plugins: [
+    '@babel/transform-runtime',
+    'babel-plugin-annotate-pure-calls',
+    'babel-plugin-dev-expression',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-private-methods',
+  ],
+}

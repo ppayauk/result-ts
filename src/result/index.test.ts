@@ -1,4 +1,7 @@
-/* eslint functional/no-throw-statement:off*/
+/* eslint functional/no-throw-statement:off */
+
+import * as fc from 'fast-check'
+import * as R from 'fp-ts/lib/Record'
 import {
   ok,
   isOk,
@@ -10,8 +13,6 @@ import {
   flattenArray,
   flattenRecord,
 } from '.'
-import * as fc from 'fast-check'
-import * as R from 'fp-ts/lib/Record'
 
 describe('Ok', () => {
   it('Creates an Ok with value', () => {
@@ -51,7 +52,7 @@ describe('Err', () => {
   })
 })
 
-describe('uwrap', () => {
+describe('unwrap', () => {
   it('Should unwrap ok', () => {
     fc.assert(
       fc.property(fc.anything(), (anyValue) => {
@@ -145,26 +146,22 @@ describe('flattenArray', () => {
   it("Flattens list of ok's", () => {
     fc.assert(
       fc.property(fc.array(fc.anything()), (arrayOfAny) => {
-        const arrayOfOks = arrayOfAny.map((anything) => {
-          return ok(anything)
-        })
-        const flattend = flattenArray(arrayOfOks)
-        expect(flattend).toEqual(ok(arrayOfAny))
+        const arrayOfOks = arrayOfAny.map(ok)
+        const flattened = flattenArray(arrayOfOks)
+        expect(flattened).toEqual(ok(arrayOfAny))
       })
     )
   })
   it("Flattens list of err's", () => {
     fc.assert(
       fc.property(fc.array(fc.anything(), { minLength: 1 }), (arrayOfAny) => {
-        const arrayOfErrs = arrayOfAny.map((anything) => {
-          return err(anything)
-        })
-        const flattend = flattenArray(arrayOfErrs)
-        expect(flattend).toEqual(err(arrayOfAny[0]))
+        const arrayOfErrs = arrayOfAny.map(err)
+        const flattened = flattenArray(arrayOfErrs)
+        expect(flattened).toEqual(err(arrayOfAny[0]))
       })
     )
   })
-  it("Flattens list of mixed errors's and ok's", () => {
+  it("Flattens list of mixed errors and ok's", () => {
     fc.assert(
       fc.property(fc.array(fc.anything(), { minLength: 2 }), (arrayOfAny) => {
         const arrayOfErrs = arrayOfAny.map((anything, index) => {
@@ -173,8 +170,8 @@ describe('flattenArray', () => {
           }
           return err(anything)
         })
-        const flattend = flattenArray(arrayOfErrs)
-        expect(flattend).toEqual(err(arrayOfAny[1]))
+        const flattened = flattenArray(arrayOfErrs)
+        expect(flattened).toEqual(err(arrayOfAny[1]))
       })
     )
   })
@@ -182,8 +179,8 @@ describe('flattenArray', () => {
 describe('flattenRecord', () => {
   it("Flattens record of ok's", () => {
     const oks = { A: ok(1), B: ok(2), C: ok(3) }
-    const flattend = flattenRecord(oks)
-    expect(flattend).toEqual(
+    const flattened = flattenRecord(oks)
+    expect(flattened).toEqual(
       ok({
         A: 1,
         B: 2,
@@ -191,15 +188,15 @@ describe('flattenRecord', () => {
       })
     )
   })
-  it("Flattens record of errors's", () => {
+  it('Flattens record of errors', () => {
     const oks = { A: err(1), B: err(2), C: err(3) }
-    const flattend = flattenRecord(oks)
-    expect(flattend).toEqual(err(1))
+    const flattened = flattenRecord(oks)
+    expect(flattened).toEqual(err(1))
   })
-  it("Flattens record of mixed errors's and ok's", () => {
+  it("Flattens record of mixed errors and ok's", () => {
     const oks = { A: ok(1), B: err(2), C: err(3) }
-    const flattend = flattenRecord(oks)
-    expect(flattend).toEqual(err(2))
+    const flattened = flattenRecord(oks)
+    expect(flattened).toEqual(err(2))
   })
   it("Flattens record of random ok's", () => {
     fc.assert(
@@ -210,10 +207,10 @@ describe('flattenRecord', () => {
           c: fc.anything(),
         }),
         (recordOfAny) => {
-          const recordOfResults = R.map((a) => ok(a))(recordOfAny)
-          const flattend = flattenRecord(recordOfResults)
-          expect(isOk(flattend)).toBeTruthy()
-          mapOk(flattend, (okRecord) => {
+          const recordOfResults = R.map(ok)(recordOfAny)
+          const flattened = flattenRecord(recordOfResults)
+          expect(isOk(flattened)).toBeTruthy()
+          mapOk(flattened, (okRecord) => {
             expect(okRecord).toEqual(recordOfAny)
           })
         }
@@ -229,10 +226,10 @@ describe('flattenRecord', () => {
           b: fc.anything(),
         }),
         (recordOfAny) => {
-          const recordOfResults = R.map((a) => err(a))(recordOfAny)
-          const flattend = flattenRecord(recordOfResults)
-          expect(isErr(flattend)).toBeTruthy()
-          mapErr(flattend, (errFirst) => {
+          const recordOfResults = R.map(err)(recordOfAny)
+          const flattened = flattenRecord(recordOfResults)
+          expect(isErr(flattened)).toBeTruthy()
+          mapErr(flattened, (errFirst) => {
             expect(errFirst).toEqual(recordOfAny.a)
           })
         }
@@ -248,10 +245,10 @@ describe('flattenRecord', () => {
           b: fc.anything(),
         }),
         (recordOfAny) => {
-          const recordOfResults = R.map((a) => err(a))(recordOfAny)
-          const flattend = flattenRecord(recordOfResults)
-          expect(isErr(flattend)).toBeTruthy()
-          mapErr(flattend, (errFirst) => {
+          const recordOfResults = R.map(err)(recordOfAny)
+          const flattened = flattenRecord(recordOfResults)
+          expect(isErr(flattened)).toBeTruthy()
+          mapErr(flattened, (errFirst) => {
             expect(errFirst).toEqual(recordOfAny['1'])
           })
         }
