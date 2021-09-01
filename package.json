@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "private": false,
   "description": "Rust's Result implemented in Typescript using fp-ts",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm/index.js",
   "files": [
     "build"
   ],
+  "exports": {
+    "require": "./build/cjs/index.js",
+    "import": "./build/esm/index.js"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -21,7 +25,7 @@
     "lint.fix": "eslint --fix src/",
     "format": "prettier --check src",
     "format.fix": "prettier --write src",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "ts": "tsc -v  && tsc --noEmit -p tsconfig.json",
     "test": "CI=true JEST_JUNIT_OUTPUT_DIR=out JEST_JUNIT_OUTPUT_FILE=./out/test-results.xml jest --testResultsProcessor ./node_modules/jest-junit",
     "test.watch": "jest --watchAll",
