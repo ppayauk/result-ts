@@ -20,7 +20,7 @@
     "url": "https://github.com/ppayauk/result-ts"
   },
   "scripts": {
-    "commit": "cz",
+    "cmt": "cz",
     "lint": "eslint -v && eslint src/",
     "lint.fix": "eslint --fix src/",
     "format": "prettier --check src",
