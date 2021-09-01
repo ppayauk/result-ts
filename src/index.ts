@@ -1,4 +1,7 @@
 import {
+  Result,
+  Err,
+  Ok,
   err,
   ok,
   isErr,
@@ -12,6 +15,7 @@ import {
 import { safe } from './safe'
 import { safeAsync } from './safeAsync'
 
+export type { Result, Err, Ok }
 export {
   err,
   ok,
