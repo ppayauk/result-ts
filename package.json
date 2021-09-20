@@ -29,8 +29,7 @@
     "ts": "tsc -v  && tsc --noEmit -p tsconfig.json",
     "test": "CI=true JEST_JUNIT_OUTPUT_DIR=out JEST_JUNIT_OUTPUT_FILE=./out/test-results.xml jest --testResultsProcessor ./node_modules/jest-junit",
     "test.watch": "jest --watchAll",
-    "test.cov": "CI=true jest --coverage --ci --coverageDirectory='<rootDir>/out'",
-    "prepare": "npm run build"
+    "test.cov": "CI=true jest --coverage --ci --coverageDirectory='<rootDir>/out'"
   },
   "author": "james@ppaya.co.uk",
   "license": "ISC",
