@@ -1,5 +1,7 @@
-export type { Err, Ok, Result } from './result'
-export {
+import {
+  Result,
+  Err,
+  Ok,
   err,
   ok,
   isErr,
@@ -10,5 +12,20 @@ export {
   flattenArray,
   flattenRecord,
 } from './result'
-export { safe } from './safe'
-export { safeAsync } from './safeAsync'
+import { safe } from './safe'
+import { safeAsync } from './safeAsync'
+
+export type { Result, Err, Ok }
+export {
+  err,
+  ok,
+  isErr,
+  isOk,
+  unwrap,
+  mapErr,
+  mapOk,
+  flattenArray,
+  flattenRecord,
+  safe,
+  safeAsync,
+}

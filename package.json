@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "private": false,
   "description": "Rust's Result implemented in Typescript using fp-ts",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm/index.js",
+  "types": "./build/esm/index.d.ts",
   "files": [
     "build"
   ],
+  "exports": {
+    "require": "./build/cjs/index.js",
+    "import": "./build/esm/index.js"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -16,17 +21,16 @@
     "url": "https://github.com/ppayauk/result-ts"
   },
   "scripts": {
-    "commit": "cz",
+    "cmt": "cz",
     "lint": "eslint -v && eslint src/",
     "lint.fix": "eslint --fix src/",
     "format": "prettier --check src",
     "format.fix": "prettier --write src",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
     "ts": "tsc -v  && tsc --noEmit -p tsconfig.json",
     "test": "CI=true JEST_JUNIT_OUTPUT_DIR=out JEST_JUNIT_OUTPUT_FILE=./out/test-results.xml jest --testResultsProcessor ./node_modules/jest-junit",
     "test.watch": "jest --watchAll",
-    "test.cov": "CI=true jest --coverage --ci --coverageDirectory='<rootDir>/out'",
-    "prepare": "npm run build"
+    "test.cov": "CI=true jest --coverage --ci --coverageDirectory='<rootDir>/out'"
   },
   "author": "james@ppaya.co.uk",
   "license": "ISC",
